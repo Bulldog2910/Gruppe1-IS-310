@@ -17,9 +17,16 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../lib/Bilder/abstract-geometric-wireframe-background/5153829.jpg") center/cover no-repeat;
+  opacity: 0.4; /* adjust between 0 (transparent) and 1 (opaque) */
+  z-index: -1;  /* behind all content */}
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
