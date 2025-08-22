@@ -2,9 +2,22 @@
     display: flex;
     flex-direction: column;
 }
+.gruppemedlem-navn {
+    display: flex;
+    align-items: center;
+    background-color: rgb(217, 196, 176);
+    border-radius: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
 
 .gruppemedlem-bilde{
-    max-width: 30%
+    max-width: 100%;
+    padding-top: 5% ;
+    padding-bottom: 5%;
+    padding-left: 10%;
 }
 .gruppemedlemer-alle{
     background-color: rgb(187, 220, 229);
@@ -12,3 +25,13 @@
     padding-left: 2%;
     border-radius: 15px;
 }
+
+.mathias-flex{
+    display: flex;
+}
+
+.bilde-flex-item{
+    width: fit-content;
+    flex: 0.5;
+}
+
