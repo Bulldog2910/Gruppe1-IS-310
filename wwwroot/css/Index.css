@@ -144,14 +144,273 @@ section{
 .gruppemedlem-flex {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    
+}
+.gruppemedlem-navn {
+    display: flex;
+    align-items: center;
+    background-color: rgb(217, 196, 176);
+    border-radius: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .gruppemedlem-bilde{
-    max-width: 30%
+    padding: 1%;
+    border-radius: 16px;
 }
 .gruppemedlemer-alle{
     background-color: rgb(187, 220, 229);
     margin-bottom: 2%;
     padding-left: 2%;
     border-radius: 15px;
+    
 }
+.gruppemedlem-info{
+    width: 50%;
+
+}
+.gruppemedlem-info-tekst{
+    width: auto;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.mathias-flex {
+    display: flex;
+    align-items: flex-start; /* aligns content nicely */
+    gap: 1rem; /* spacing between image and text */
+}
+
+.bilde-flex-item{
+    width: fit-content;
+    flex: 0.5;
+}
+
+.morro-gif{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 80%;
+    height: auto;
+}
+
+.gif-flex{
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 100%;
+    padding-left: 15%;
+
+}
+
+/* make the old wrapper not affect layout */
+.frame {
+    display: contents; /* wrapper exists but creates no box */
+}
+
+/* animated neon border directly on the image */
+.frame {
+    /* controls */
+    --border-w: 2px;   /* border thickness */
+    --angle: 0deg;     /* animated via keyframes */
+
+    display: block;
+    box-sizing: border-box;
+    padding: 0 !important;              /* stop the padding from your earlier rule */
+    border: var(--border-w) solid transparent;
+    border-radius: 16px;
+
+    /* 2-layer background trick: gradient only in border area */
+    background:
+            linear-gradient(#0000, #0000) padding-box, /* transparent fill */
+            conic-gradient(from var(--angle),
+            #00eaff,
+            #6a00ff,
+            #ff004c,
+            #ffe700,
+            #00eaff
+            ) border-box;
+
+    /* neon glow (animated below) */
+    box-shadow:
+            0 0 8px #00eaff,
+            0 0 16px #00eaff,
+            0 0 32px #00eaff;
+
+    /* smooth edges & sizing */
+    max-width: 100%;
+    height: auto;
+
+    /* animations */
+    animation: spinBorder 6s linear infinite, glowShift 6s ease-in-out infinite;
+}
+
+/* allow smooth animation of the conic-gradient angle */
+@property --angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes spinBorder {
+    to { --angle: 360deg; }
+}
+
+/* cycle the glow color */
+@keyframes glowShift {
+    0%, 100% {
+        box-shadow: 0 0 8px #00eaff, 0 0 16px #00eaff, 0 0 32px #00eaff;
+    }
+    33% {
+        box-shadow: 0 0 8px #ff004c, 0 0 16px #ff004c, 0 0 32px #ff004c;
+    }
+    66% {
+        box-shadow: 0 0 8px #8a2be2, 0 0 16px #8a2be2, 0 0 32px #8a2be2;
+    }
+}
+
+.mathias-flex .gruppemedlem-bilde {
+    max-width: 100%;   /* respect parent width */
+    width: 100%;       /* fill its flex box */
+    height: auto;      /* keep aspect ratio */
+    flex: 1 1 auto;    /* allow shrinking and growing */
+    min-width: 100px;  /* never smaller than 150px */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.box-card {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    cursor: pointer;
+}
+
+.box-card:hover {
+    animation: rotate3d 8s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    backface-visibility: visible;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f8e4a6, rgb(217, 196, 176));
+    border: 2px solid #646cff;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.face::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    top: -100%;
+    left: -100%;
+    transition: all 0.5s ease;
+    transform: translateZ(20px);
+}
+
+.face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            135deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.face:hover::before {
+    top: 100%;
+    left: 100%;
+}
+
+.face:hover::after {
+    opacity: 1;
+}
+
+.front {
+    transform: translateZ(100px);
+    border-color: #646cff;
+}
+
+.back {
+    transform: translateZ(-100px) rotateY(180deg);
+    border-color: #00bcd4;
+}
+
+.right {
+    transform: translateX(100px) rotateY(90deg);
+    border-color: #4caf50;
+}
+
+.left {
+    transform: translateX(-100px) rotateY(-90deg);
+    border-color: #ff4081;
+}
+
+.top {
+    transform: translateY(-100px) rotateX(90deg);
+    border-color: #ffc107;
+}
+
+.bottom {
+    transform: translateY(100px) rotateX(-90deg);
+    border-color: #9c27b0;
+}
+
+@keyframes rotate3d {
+    0% {
+        transform: rotateX(0) rotateY(0);
+    }
+    25% {
+        transform: rotateX(90deg) rotateY(90deg);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg);
+    }
+    75% {
+        transform: rotateX(270deg) rotateY(270deg);
+    }
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .box-card {
+        width: 150px;
+        height: 150px;
+    }
+
+    .front { transform: translateZ(75px); }
+    .back { transform: translateZ(-75px) rotateY(180deg); }
+    .right { transform: translateX(75px) rotateY(90deg); }
+    .left { transform: translateX(-75px) rotateY(-90deg); }
+    .top { transform: translateY(-75px) rotateX(90deg); }
+    .bottom { transform: translateY(75px) rotateX(-90deg); }
+}
+
+
